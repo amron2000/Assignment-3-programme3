@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -105,22 +104,14 @@ public class Main extends Application {
             add.setOnAction(eventHandler);
 
 
-            reset.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    idField.setText("");
-                    nameField.setText("");
-                    majorField.setText("");
-                    gradeField.setText("");
-                }
+            reset.setOnAction(event -> {
+                idField.setText("");
+                nameField.setText("");
+                majorField.setText("");
+                gradeField.setText("");
             });
 
-            exit.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    window2.close();
-                }
-            });
+           exit.setOnAction(event -> window2.close());
 
             Scene scene = new Scene(grid, 700, 570);
             scene.getStylesheets().add("Css.css");
@@ -145,8 +136,11 @@ public class Main extends Application {
                     listView.getItems().addAll(list);
                 }
             }
-            listView.getItems().setAll(listView.getItems().stream().sorted(Comparator.comparingDouble(Student::getGrade).reversed())
-                    .collect(Collectors.toList())
+            listView.getItems()
+                        .setAll(listView.getItems().stream()
+                        .sorted(Comparator.comparingDouble(Student::getGrade).reversed())
+                        // Terminal OP        
+                        .collect(Collectors.toList())
             );
 
         }
